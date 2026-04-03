@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nguyen Huy Hoang – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber:        #f59e0b;
+      --amber-dark:   #d97706;
+      --amber-deeper: #b45309;
+      --orange:       #f97316;
+      --orange-dark:  #ea6c0a;
+      --cream:        #fffbf2;
+      --warm-bg:      #fef3c7;
+      --card-bg:      #ffffff;
+      --nav-bg:       #1c1408;
+      --text-dark:    #1c1408;
+      --text-mid:     #5c4a1e;
+      --text-muted:   #78614a;
+      --border:       #fde68a;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--nav-bg);
+      padding: 0 56px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--amber-dark);
+    }
+
+    .nav-brand {
+      color: var(--amber);
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #d4b896;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--amber);
+      border-radius: 2px;
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--amber); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 62px);
+      padding: 60px 48px;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, #fef3c766 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, #fed7aa44 0%, transparent 60%),
+        var(--cream);
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow:
+        0 0 0 1.5px var(--border),
+        0 8px 40px rgba(245,158,11,0.12),
+        0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      gap: 52px;
+      padding: 52px 56px;
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--amber) 0%, var(--orange) 100%);
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fef3c7 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── PHOTO ── */
+    .photo-wrap {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .photo-frame {
+      width: 200px;
+      height: 240px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--warm-bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--orange) 100%);
+      transform: translate(6px, 6px);
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #b45309;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .photo-placeholder svg {
+      width: 52px; height: 52px;
+      opacity: 0.35;
+    }
+
+    /* ── BIO ── */
+    .bio { flex: 1; }
+
+    .bio h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .bio .roles {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--orange-dark);
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 0;
+    }
+
+    .roles-sep {
+      color: var(--amber);
+      margin: 0 8px;
+    }
+
+    .bio p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      max-width: 500px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 22px;
+      border-radius: 9px;
+      font-size: 0.865rem;
+      font-weight: 600;
+      font-family: 'Sora', sans-serif;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--amber) 0%, var(--orange) 100%);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(249,115,22,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(249,115,22,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-mid);
+      border: 1.5px solid #fcd34d;
+    }
+    .btn-outline:hover {
+      background: var(--warm-bg);
+      border-color: var(--amber);
+      color: var(--text-dark);
+    }
+
+    .btn svg { width: 13px; height: 13px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 32px 16px; }
+      .hero-card { flex-direction: column; padding: 36px 24px; gap: 28px; text-align: center; }
+      .bio .roles { justify-content: center; }
+      .bio p { margin-left: auto; margin-right: auto; }
+      .btn-group { justify-content: center; }
+      .photo-frame { width: 150px; height: 180px; }
+      .bio h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#about">About Me</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="about">
+  <div class="hero-card">
+
+    <div class="photo-wrap">
+      <div class="photo-frame">
+        <!--
+          Thay bằng ảnh thật:
+          <img src="photo.jpg" alt="Nguyen Huy Hoang" />
+        -->
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="8" r="4.5"/>
+            <path d="M3.5 21c0-4.5 3.8-8 8.5-8s8.5 3.5 8.5 8"/>
+          </svg>
+          <span>Thêm ảnh của bạn</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio">
+      <h1>NGUYEN HUY HOANG</h1>
+      <div class="roles">
+        <span>Industrial Systems Engineer</span>
+        <span class="roles-sep">|</span>
+        <span>Production Analytics</span>
+        <span class="roles-sep">|</span>
+        <span>Lean Manufacturing</span>
+      </div>
+      <p>
+        Industrial Systems Engineering student at HCMUT focused on production analytics,
+        operational optimization, and digitalization. Foundational in data analysis, SQL querying,
+        and Microsoft Power Platform. Proficient in statistical process control, discrete-event
+        simulation, data-driven decision making, and lean methodology.
+      </p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary">Contact Me</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="btn btn-outline">
+          LinkedIn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+        <a href="resume.pdf" target="_blank" rel="noopener" class="btn btn-outline">
+          Resume
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
